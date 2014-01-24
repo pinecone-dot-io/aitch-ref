@@ -107,7 +107,7 @@ function get_urls( $as_array = FALSE ){
 	if( !is_array($urls) )
 		$urls = (array) json_decode( $urls );
 	
-	if( !$as_array ){
+	if( !$as_array )
 		$urls = implode( "\n", $urls );
 	
 	return $urls;
