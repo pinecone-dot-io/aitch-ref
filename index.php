@@ -65,7 +65,7 @@ class AitchRef{
 		} else {
 			$url2 = str_replace( self::$possible, '', $url );
 		}
-			
+		
 		return $url2;		
 	}
 	
