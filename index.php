@@ -45,7 +45,7 @@ class AitchRef{
 						   'option_home', 'option_siteurl', 'page_link', 'post_link',
 						   'siteurl', 'site_url', 'stylesheet_uri', 
 						   'template_directory_uri', 'wp_get_attachment_url' );
-		$absolute = apply_filters( 'aitch-ref-relative', $absolute );
+		$absolute = apply_filters( 'aitch-ref-absolute', $absolute );
 		
 		foreach( $absolute as $filter )
 			add_filter( $filter, __NAMESPACE__.'\AitchRef::site_url_absolute' );
@@ -65,7 +65,7 @@ class AitchRef{
 		} else {
 			$url2 = str_replace( self::$possible, '', $url );
 		}
-		
+			
 		return $url2;		
 	}
 	
@@ -84,8 +84,8 @@ class AitchRef{
 			$url2 = str_replace( self::$possible, self::$baseurl, $url );
 		}
 		
-		// what is this??
-		if( strpos($url2, self::$baseurl) !== 0 && strpos($url2, 'http://') !== 0 ){
+		//
+		if( (strpos($url2, self::$baseurl) !== 0) && (strpos($url2, 'http://') !== 0) && (strpos($url2, 'https://') !== 0) ){
 			$url2 = self::$baseurl.$url2;
 		}
 		

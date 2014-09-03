@@ -20,7 +20,7 @@ Useful for switching between different development environments.  Attempts to re
 
 == Changelog ==
 = .91 =
-add unit tests
+fixed typo in absolute filter, fix absolute check with offsite https links
 
 = .9 =
 refactor to namespace 
