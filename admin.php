@@ -42,23 +42,23 @@ function message( $string = NULL ){
 	return $messages;
 }
 
-/*
+/**
 *	callback for add_options_page() to render options page in admin 
-*
+*	@return
 */
 function options_general(){
-	if( isset($_POST['urls']) ){
-		update_urls( $_POST['urls'] );
+	if( isset($_POST['aitchref']['urls']) ){
+		update_urls( $_POST['aitchref']['urls'] );
 	}
 	
 	wp_enqueue_style( 'aitch-ref', plugins_url( 'public/admin/options-general.css', __FILE__ ), 
                        array(), '' );
 
 	$vars = array(
-		'filters_absolute' => '',
-		'filters_relative' => '',
+		'filters_absolute' => implode( ', ', get_filters_options('absolute') ),
+		'filters_relative' => implode( ', ', get_filters_options('relative') ),
 		'messages' => implode( "\n", message() ),
-		'urls' => get_urls()
+		'urls' => get_urls_option()
 	);
 	
 	render( 'admin/options-general', $vars );
