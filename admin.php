@@ -47,10 +47,9 @@ function message( $string = NULL ){
 *	@return
 */
 function options_general(){
-	if( isset($_POST['aitchref']['urls']) ){
-		update_urls( $_POST['aitchref']['urls'] );
-	}
-	
+	if( isset($_POST['_wpnonce']) && wp_verify_nonce( $_POST['_wpnonce'], 'aitch-ref-admin' ) )
+		update_options( $_POST['aitchref'] );
+
 	wp_enqueue_style( 'aitch-ref', plugins_url( 'public/admin/options-general.css', __FILE__ ), 
                        array(), '' );
 
@@ -77,6 +76,30 @@ function render( $filename, $vars = array() ){
 		extract( (array) $vars, EXTR_SKIP );
 		include $template;
 	}
+}
+
+/**
+*
+*/
+function update_filters( $str, $which = 'absolute' ){
+	$option_name = sprintf( 'aitchref_filters_%s', $which );
+	$value = explode( ',' , $str );
+	$value = array_map( 'trim', $value );
+	sort( $value );
+
+	update_option( $option_name, json_encode($value) );
+}
+
+/**
+*
+*	@param array
+*	@return
+*/
+function update_options( $post_data ){
+	update_filters( $post_data['filters_absolute'], 'absolute' );
+	update_filters( $post_data['filters_relative'], 'relative' );
+
+	update_urls( $post_data['urls'] );
 }
 	
 /**

@@ -8,7 +8,7 @@
 */
 function aitch( $url, $absolute = FALSE ){
 	if( $absolute )
-		return aitchref\AitchRef::site_url_absolute( $url );
+		return aitchref\site_url_absolute( $url );
 	else
-		return aitchref\AitchRef::site_url( $url );
+		return aitchref\site_url_relative( $url );
 }
