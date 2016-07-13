@@ -51,11 +51,15 @@ function options_general(){
 		update_urls( $_POST['urls'] );
 	}
 	
-	$vars = (object) array();
-	
-	$vars->messages = implode( "\n", message() );
-	$vars->path = plugins_url( '', __FILE__ );
-	$vars->urls = esc_textarea( get_urls() );
+	wp_enqueue_style( 'aitch-ref', plugins_url( 'public/admin/options-general.css', __FILE__ ), 
+                       array(), '' );
+
+	$vars = array(
+		'filters_absolute' => '',
+		'filters_relative' => '',
+		'messages' => implode( "\n", message() ),
+		'urls' => get_urls()
+	);
 	
 	render( 'admin/options-general', $vars );
 }
