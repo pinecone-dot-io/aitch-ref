@@ -2,7 +2,7 @@
 
 namespace aitchref;
 
-/*
+/**
 *	show link to admin options in 'settings' sidebar
 *
 */
@@ -11,7 +11,7 @@ function admin_menu(){
 }
 add_action( 'admin_menu', __NAMESPACE__.'\admin_menu' );
 
-/*
+/**
 *	add 'settings' link in main plugins page
 *	attached to plugin_action_links_* action
 *	@param array
@@ -25,7 +25,7 @@ function admin_plugins( $links ){
 }
 add_filter( 'plugin_action_links_aitch-ref/_plugin.php', __NAMESPACE__.'\admin_plugins' );
 	
-/*
+/**
 *	get and set messages
 *	@param string
 *	@return array
@@ -64,7 +64,7 @@ function options_general(){
 	render( 'admin/options-general', $vars );
 }
 
-/*
+/**
 *	render a page into wherever
 *	(only used in admin screen)
 *	@param string
@@ -79,8 +79,8 @@ function render( $filename, $vars = array() ){
 	}
 }
 	
-/*
-*
+/**
+*	takes user input of urls, splits by space or new line, saves to array
 *	@param string
 *	@return
 */
