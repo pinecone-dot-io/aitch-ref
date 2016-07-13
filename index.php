@@ -71,23 +71,71 @@ function setup(){
 	// these can return back urls starting with /
 	$relative = apply_filters( 'aitch-ref-relative', get_filters_options('relative') );
 	foreach( $relative as $filter )
-		add_filter( $filter, __NAMESPACE__.'\AitchRef::site_url_relative' );
+		add_filter( $filter, __NAMESPACE__.'\site_url_relative' );
 	
 	// these need to return back with leading http://
 	$absolute = apply_filters( 'aitch-ref-absolute', get_filters_options('absolute') );
 	foreach( $absolute as $filter )
-		add_filter( $filter, __NAMESPACE__.'\AitchRef::site_url_absolute' );
+		add_filter( $filter, __NAMESPACE__.'\site_url_absolute' );
 }
 add_action( 'plugins_loaded', __NAMESPACE__.'\setup' );
 
-/**
-*
-*/
-function site_urls(){
+function server_url(){
+	static $sever_url;
 
+	if( !$sever_url )
+		$sever_url = is_ssl() ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
+
+	return  $sever_url;
 }
 
-AitchRef::setup();
+/**
+*
+*	@return array
+*/
+function site_urls(){
+	static $site_urls;
 
+	if( !$site_urls ){
+		// do this to get best match first
+		$site_urls = array_reverse( get_urls_option(TRUE) );
+	}
 
+	return $site_urls;
+}
 
+/**
+*	add_filter callback
+*	@param mixed
+*	@return mixed
+*/
+function site_url_relative( $url ){
+	if( is_array($url) ){
+		// this is to fix an issue in 'upload_dir' filter, 
+		// $url[error] needs to be a boolean but str_replace casts to string
+		$url2 = str_replace( site_urls(), '', array_filter($url) );
+		$url2 = array_merge( $url, $url2 );
+	} else {
+		$url2 = str_replace( site_urls(), '', $url );
+	}
+		
+	return $url2;		
+}
+
+/**
+*	add_filter callback
+*	@param mixed
+*	@return mixed
+*/
+function site_url_absolute( $url ){
+	if( is_array($url) ){
+		// this is to fix a bug in 'upload_dir' filter, 
+		// $url[error] needs to be a boolean but str_replace casts to string
+		$url2 = str_replace( site_urls(), server_url(), array_filter($url) );
+		$url2 = array_merge( $url, $url2 );
+	} else {
+		$url2 = str_replace( site_urls(), server_url(), $url );
+	}
+	
+	return $url2;
+}
