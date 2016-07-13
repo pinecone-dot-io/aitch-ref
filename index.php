@@ -38,8 +38,9 @@ function get_filters_options( $which = 'absolute' ){
 			default:
 				$urls = array();
 				break;
-		}
-		
+		}	
+	} else {
+		$urls = json_decode( $urls );
 	}
 
 	return $urls;

@@ -3,6 +3,7 @@ textarea.aitch-ref{
 }
 
 textarea.filters{
+	font-family: monospace;
 	height: 200px;
 }
 

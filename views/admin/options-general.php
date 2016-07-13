@@ -4,7 +4,7 @@
 	<?php echo $messages; ?>
 
 	<form method="post">
-		<?php wp_nonce_field( 'aitch-ref', '_wpnonce', FALSE, TRUE ); ?> 
+		<?php wp_nonce_field( 'aitch-ref-admin', '_wpnonce', FALSE, TRUE ); ?> 
 
 		<h3>Site URLs</h3>
 		<textarea class="aitch-ref has-ref" name="aitchref[urls]"><?php echo esc_textarea( $urls ); ?></textarea>
