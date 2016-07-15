@@ -20,9 +20,9 @@ function get_filters_options( $which = 'absolute' ){
 	if( $urls === FALSE ){
 		switch( $which ){
 			case 'absolute':
-				$urls = array( 'admin_url', 'bloginfo', 'bloginfo_url', 'get_permalink', 'home_url', 'login_url',
-							   'option_home', 'option_siteurl', 'page_link', 'post_link',
-							   'siteurl', 'site_url', 'stylesheet_uri', 
+				$urls = array( 'admin_url', 'bloginfo', 'bloginfo_url', 'get_permalink', 'get_the_author_user_url',
+							   'home_url', 'login_url','option_home', 'option_siteurl', 
+							   'page_link', 'post_link', 'siteurl', 'site_url', 'stylesheet_uri', 
 							   'template_directory_uri', 'upload_dir', 'wp_get_attachment_url',
 							   // @TODO get this to work
 							   'acf/helpers/get_dir' );
