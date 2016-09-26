@@ -29,7 +29,7 @@ class AitchRef{
 		self::$baseurl = is_ssl() ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
 
 		// these can return back urls starting with /
-		$relative = array( 'content_url', 'get_pagenum_link', 'option_url', 
+		$relative = array( 'acf/load_value', 'content_url', 'get_pagenum_link', 'option_url', 
 						   'plugins_url', 'pre_post_link', 'script_loader_src',
 						   'style_loader_src', 'term_link', 'the_content',
 						   'url', 'wp_list_pages' );
