@@ -15,7 +15,7 @@ class AitchRef{
 	private static $possible = array();							// a list of the possible base urls that 
 																// can be replaced
 	 
-	/*
+	/**
 	*	runs once when plugin has loaded, sets up vars and adds filters/actions
 	*	@return NULL
 	*/
@@ -52,7 +52,7 @@ class AitchRef{
 			add_filter( $filter, __NAMESPACE__.'\AitchRef::site_url_absolute' );
 	}
 	
-	/*
+	/**
 	*	add_filter callback
 	*	@param mixed
 	*	@return mixed
@@ -67,7 +67,7 @@ class AitchRef{
 		return $url;		
 	}
 	
-	/*
+	/**
 	*	add_filter callback
 	*	@param mixed
 	*	@return mixed
@@ -75,7 +75,7 @@ class AitchRef{
 	public static function site_url_absolute( $url ){
 		if( is_array($url) ){
 			return array_map( array(__NAMESPACE__.'\AitchRef', 'site_url_absolute'), $url );
-		} else {
+		} elseif( is_string($url) ){
 			$url = str_replace( self::$possible, self::$baseurl, $url );
 		}
 		
@@ -85,7 +85,7 @@ class AitchRef{
 
 AitchRef::setup();
 
-/*
+/**
 *	db interaction
 *	@param bool
 *	@return string | array
@@ -105,7 +105,7 @@ function get_urls( $as_array = FALSE ){
 
 // MU wrappers
 
-/*
+/**
 *
 *	@param
 *	@return
@@ -115,7 +115,7 @@ function delete_option( $key ){
 	return is_multisite() ? \delete_blog_option( $blog_id, $key ) : \delete_option( $key );
 }
 
-/*
+/**
 *
 *	@param
 *	@return
@@ -125,7 +125,7 @@ function get_option( $key ){
 	return is_multisite() ? \get_blog_option( $blog_id, $key ) : \get_option( $key );
 }
 
-/*
+/**
 *
 *	@param
 *	@param
