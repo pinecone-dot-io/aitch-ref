@@ -59,15 +59,12 @@ class AitchRef{
 	*/
 	public static function site_url( $url ){
 		if( is_array($url) ){
-			// this is to fix an issue in 'upload_dir' filter, 
-			// $url[error] needs to be a boolean but str_replace casts to string
-			$url2 = str_replace( self::$possible, '', array_filter($url) );
-			$url2 = array_merge( $url, $url2 );
-		} else {
-			$url2 = str_replace( self::$possible, '', $url );
+			return array_map( array(__NAMESPACE__.'\AitchRef', 'site_url'), $url );
+		} elseif( is_string($url) ){
+			$url = str_replace( self::$possible, '', $url );
 		}
-			
-		return $url2;		
+		
+		return $url;		
 	}
 	
 	/*
@@ -77,15 +74,12 @@ class AitchRef{
 	*/
 	public static function site_url_absolute( $url ){
 		if( is_array($url) ){
-			// this is to fix a bug in 'upload_dir' filter, 
-			// $url[error] needs to be a boolean but str_replace casts to string
-			$url2 = str_replace( self::$possible, self::$baseurl, array_filter($url) );
-			$url2 = array_merge( $url, $url2 );
+			return array_map( array(__NAMESPACE__.'\AitchRef', 'site_url_absolute'), $url );
 		} else {
-			$url2 = str_replace( self::$possible, self::$baseurl, $url );
+			$url = str_replace( self::$possible, self::$baseurl, $url );
 		}
 		
-		return $url2;
+		return $url;
 	}
 }
 
