@@ -1,6 +1,6 @@
 <?php
 
-/*
+/**
 *	helper for AitchRef to use directly in templates
 *	@param string the url
 *	@param bool to use absolute or not
