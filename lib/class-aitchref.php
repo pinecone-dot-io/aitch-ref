@@ -4,10 +4,10 @@ namespace aitchref;
 
 class AitchRef{
 	// these will be overwritten in setup()
-	private static $baseurl = 'http://';						// is_ssl()
-	private static $blog_id = 1;								// multiuser support
+	protected static $baseurl = 'http://';						// is_ssl()
+	protected static $blog_id = 1;								// multiuser support
 	
-	private static $possible = array();							// a list of the possible base urls that 
+	protected static $possible = array();						// a list of the possible base urls that 
 																// can be replaced
 	 
 	/**
@@ -19,7 +19,7 @@ class AitchRef{
 		self::$blog_id = $blog_id;
 
 		// do this to get best match first
-		self::$possible = array_reverse( get_urls(TRUE) );
+		self::$possible = array_reverse( self::get_urls(TRUE) );
 
 		self::$baseurl = is_ssl() ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
 
@@ -46,6 +46,24 @@ class AitchRef{
 
 		foreach( $absolute as $filter )
 			add_filter( $filter, __NAMESPACE__.'\AitchRef::site_url_absolute' );
+	}
+
+	/**
+	*	db interaction
+	*	@param bool
+	*	@return string | array
+	*/
+	public static function get_urls( $as_array = FALSE ){
+		$urls = get_option( 'aitchref_urls' );
+		
+		// backwards compat, now storing this option as a json encoded string cuz im a maverick
+		if( !is_array($urls) )
+			$urls = (array) json_decode( $urls );
+		
+		if( !$as_array )
+			$urls = implode( "\n", $urls );
+		
+		return $urls;
 	}
 	
 	/**
