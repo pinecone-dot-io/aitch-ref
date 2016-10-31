@@ -56,7 +56,7 @@ function options_general(){
 	
 	$vars->messages = implode( "\n", message() );
 	$vars->path = plugins_url( '', __FILE__ );
-	$vars->urls = esc_textarea( get_urls() );
+	$vars->urls = esc_textarea( AitchRef::get_urls() );
 	
 	render( 'admin/options-general', $vars );
 }
