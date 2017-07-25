@@ -69,6 +69,8 @@ function update_filters($str, $which = 'absolute')
     $option_name = sprintf( 'aitchref_filters_%s', $which );
     $value = explode( ',', $str );
     $value = array_map( 'trim', $value );
+    $value = array_unique( $value );
+
     sort( $value );
 
     update_option( $option_name, json_encode($value) );
