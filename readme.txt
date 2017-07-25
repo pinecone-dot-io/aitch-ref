@@ -1,9 +1,9 @@
 === aitch ref! ===
 Contributors: postpostmodern, pinecone-dot-io
-Donate link: http://www.heifer.org/
+Donate link: https://cash.me/$EricEaglstun
 Tags: url, href
 Requires at least: 3.0.0
-Tested up to: 3.8
+Tested up to: 4.8
 Stable tag: trunk
 
 Remove most absolute urls in your html.  Useful for switching between development / staging / production environments and painless deployment.  Requires PHP >= 5.3
@@ -19,6 +19,9 @@ Useful for switching between different development environments.  Attempts to re
 1. Look at your source, now back to me.  Now back to your source.
 
 == Changelog ==
+= 0.9.7 =
+major refactor, require php 5.4
+
 = .91 =
 fixed typo in absolute filter, fix absolute check with offsite https links
 

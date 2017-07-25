@@ -4,11 +4,10 @@ namespace aitchref;
 
 if (!function_exists('aitchref\version')) {
     require __DIR__.'/autoload.php';
-    require __DIR__.'/theme.php';
-    require __DIR__.'/wpmu.php';
 }
 
 if (is_admin()) {
+	new Admin;
     require __DIR__.'/admin.php';
 }
 
@@ -24,17 +23,19 @@ function get_filters_options($which = 'absolute')
     if ($urls === false) {
         switch ($which) {
             case 'absolute':
-                $urls = array( 'admin_url', 'bloginfo', 'bloginfo_url', 'get_permalink', 'get_the_author_user_url',
+                $urls = array( 'admin_url', 'bloginfo', 'bloginfo_url', 'content_url', 'get_permalink', 'get_the_author_user_url',
                                'home_url', 'login_url','option_home', 'option_siteurl',
-                               'page_link', 'post_link', 'siteurl', 'site_url', 'stylesheet_uri',
-                               'template_directory_uri', 'upload_dir', 'wp_get_attachment_url',
+                               'page_link', 'plugins_url', 'post_link',
+                               'siteurl', 'site_url', 'stylesheet_uri',
+                               'template_directory_uri', 'upload_dir',
+                               'wp_get_attachment_url',
                                // @TODO get this to work
                                'acf/helpers/get_dir' );
                 break;
 
             case 'relative':
                 $urls = array( 'get_pagenum_link', 'option_url',
-                               'plugins_url', 'pre_post_link', 'script_loader_src',
+                               'pre_post_link', 'script_loader_src',
                                'style_loader_src', 'term_link', 'the_content',
                                'url', 'wp_list_pages' );
                 break;
