@@ -1,0 +1,16 @@
+textarea.aitch-ref{
+	width: 550px;
+}
+
+textarea.filters{
+	font-family: monospace;
+	height: 200px;
+}
+
+textarea.has-ref{
+	background-image:url( ref.jpg );
+	background-position: bottom right; 
+	background-repeat: no-repeat;	
+	height: 400px;
+}
+
