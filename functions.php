@@ -1,36 +1,13 @@
-<?php 
+<?php
 
 namespace aitchref;
 
-// MU wrappers
-
 /**
 *
-*	@param
-*	@return
+*   @return string
 */
-function delete_option( $key ){
-	global $blog_id;
-	return is_multisite() ? \delete_blog_option( $blog_id, $key ) : \delete_option( $key );
-}
-
-/**
-*
-*	@param
-*	@return
-*/
-function get_option( $key ){
-	global $blog_id;
-	return is_multisite() ? \get_blog_option( $blog_id, $key ) : \get_option( $key );
-}
-
-/**
-*
-*	@param
-*	@param
-*	@return
-*/
-function update_option( $key, $val ){
-	global $blog_id;
-	return is_multisite() ? \update_blog_option( $blog_id, $key, $val ) : \update_option( $key, $val );
+function version()
+{
+    $data = get_plugin_data( __DIR__.'/_plugin.php' );
+    return $data['Version'];
 }
