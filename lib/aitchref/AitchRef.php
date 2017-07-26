@@ -19,8 +19,8 @@ class AitchRef
         // do this to get best match first
         $this->settings['urls'] = array_reverse($this->settings['urls']);
         
-        $this->server_url = defined( 'AITCH_REF_SERVER_URL' ) ? AITCH_REF_SERVER_URL : is_ssl() ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST'];
-
+        $this->server_url = defined( 'AITCH_REF_SERVER_URL' ) ? AITCH_REF_SERVER_URL : (is_ssl() ? 'https://'.$_SERVER['HTTP_HOST'] : 'http://'.$_SERVER['HTTP_HOST']);
+        
         add_action( 'plugins_loaded', [$this, 'setup'] );
     }
 
@@ -31,7 +31,6 @@ class AitchRef
     */
     public function get_setting($which)
     {
-        
         if (!isset($this->settings[$which])) {
             switch ($which) {
                 case 'filters_absolute':
@@ -60,15 +59,17 @@ class AitchRef
             $setting = $this->settings[$which];
         }
 
-            return $setting;
+        return $setting;
     }
 
     /**
     *
     */
-    public static function instance(){
-        if( !self::$instance )
+    public static function instance()
+    {
+        if (!self::$instance) {
             self::$instance = new self;
+        }
 
         return self::$instance;
     }
@@ -141,7 +142,7 @@ class AitchRef
         } else {
             $url2 = str_replace( $this->get_setting('urls'), $this->server_url, $url );
         }
-    
+       
         return $url2;
     }
 }
