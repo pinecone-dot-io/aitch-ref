@@ -7,8 +7,7 @@ if (!function_exists('aitchref\version')) {
 }
 
 if (is_admin()) {
-	new Admin;
-    require __DIR__.'/admin.php';
+    new Admin;
 }
 
 /**
