@@ -7,10 +7,15 @@ class AitchRef
     protected $settings = [];
     protected $server_url = '';
     
-    public function __construct()
+    protected static $instance;
+
+    protected function __construct()
     {
         $this->settings = get_option( 'aitch_ref_settings' );
-        
+        if (empty($this->settings)) {
+            $this->load_legacy_settings();
+        }
+
         // do this to get best match first
         $this->settings['urls'] = array_reverse($this->settings['urls']);
         
@@ -31,20 +36,20 @@ class AitchRef
             switch ($which) {
                 case 'filters_absolute':
                     $setting = ['admin_url', 'bloginfo', 'bloginfo_url', 'content_url', 'get_permalink', 'get_the_author_user_url',
-                                'home_url', 'login_url','option_home', 'option_siteurl',
-                                'page_link', 'plugins_url', 'post_link',
-                                'siteurl', 'site_url', 'stylesheet_uri',
-                                'template_directory_uri', 'upload_dir',
-                                'wp_get_attachment_url',
-                                // @TODO get this to work
-                                'acf/helpers/get_dir'];
+                            'home_url', 'login_url','option_home', 'option_siteurl',
+                            'page_link', 'plugins_url', 'post_link',
+                            'siteurl', 'site_url', 'stylesheet_uri',
+                            'template_directory_uri', 'upload_dir',
+                            'wp_get_attachment_url',
+                            // @TODO get this to work
+                            'acf/helpers/get_dir'];
                     break;
 
                 case 'filters_relative':
                     $setting = ['get_pagenum_link', 'option_url',
-                                'pre_post_link', 'script_loader_src',
-                                'style_loader_src', 'term_link', 'the_content',
-                                'url', 'wp_list_pages'];
+                            'pre_post_link', 'script_loader_src',
+                            'style_loader_src', 'term_link', 'the_content',
+                            'url', 'wp_list_pages'];
                     break;
 
                 default:
@@ -55,7 +60,33 @@ class AitchRef
             $setting = $this->settings[$which];
         }
 
-        return $setting;
+            return $setting;
+    }
+
+    /**
+    *
+    */
+    public static function instance(){
+        if( !self::$instance )
+            self::$instance = new self;
+
+        return self::$instance;
+    }
+
+    /**
+    *
+    */
+    public function load_legacy_settings()
+    {
+        $settings = [
+            'urls' => json_decode(get_option('aitchref_urls')),
+            'filters_absolute' => json_decode(get_option('aitchref_filters_absolute')),
+            'filters_relative' => json_decode(get_option('aitchref_filters_relative'))
+        ];
+
+        _deprecated_file( 'aitchref_urls, aitchref_filters_absolute, aitchref_filters_relative settings', '0.9.8', 'aitch_ref_settings', 'Please re-save Aitch Ref! settings.' );
+
+        $this->settings = $settings;
     }
 
     /**

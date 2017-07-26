@@ -1,14 +1,18 @@
 <?php
 
 /**
-*	helper for AitchRef to use directly in templates
-*	@param string the url
-*	@param bool to use absolute or not
-*	@return string
+*   helper for AitchRef to use directly in templates
+*   @param string the url
+*   @param bool to use absolute or not
+*   @return string
 */
-function aitch( $url, $absolute = FALSE ){
-	if( $absolute )
-		return aitchref\site_url_absolute( $url );
-	else
-		return aitchref\site_url_relative( $url );
+function aitch($url, $absolute = false)
+{
+    $aitch = AitchRef::instance();
+
+    if ($absolute) {
+        return $aitch->site_url_absolute( $url );
+    } else {
+        return $aitch->site_url_relative( $url );
+    }
 }

@@ -2,7 +2,7 @@
 Contributors: postpostmodern, pinecone-dot-io
 Donate link: https://cash.me/$EricEaglstun
 Tags: url, href
-Requires at least: 3.0.0
+Requires at least: 4.0
 Tested up to: 4.8
 Stable tag: trunk
 
@@ -19,6 +19,9 @@ Useful for switching between different development environments.  Attempts to re
 1. Look at your source, now back to me.  Now back to your source.
 
 == Changelog ==
+= 0.9.8 =
+allow AITCH_REF_SERVER_URL constant, back compat
+
 = 0.9.7 =
 major refactor, require php 5.4
 

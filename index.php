@@ -7,7 +7,7 @@ if (!function_exists('aitchref\version')) {
 }
 
 call_user_func( function () {
-    $aitch = new AitchRef;
+    $aitch = AitchRef::instance();
 
     if (is_admin()) {
         new Admin($aitch);
