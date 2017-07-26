@@ -113,7 +113,7 @@ class AitchRef
     *   @param mixed
     *   @return mixed
     */
-    public static function site_url_relative($url)
+    public function site_url_relative($url)
     {
         if (is_array($url)) {
             // this is to fix an issue in 'upload_dir' filter,
@@ -132,7 +132,7 @@ class AitchRef
     *   @param mixed
     *   @return mixed
     */
-    public static function site_url_absolute($url)
+    public function site_url_absolute($url)
     {
         if (is_array($url)) {
             // this is to fix a bug in 'upload_dir' filter,
