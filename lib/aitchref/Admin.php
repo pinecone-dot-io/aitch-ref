@@ -4,10 +4,15 @@ namespace aitchref;
 
 class Admin
 {
-    public function __construct()
+
+    protected $aitch = null;
+
+    public function __construct(AitchRef &$aitch)
     {
         add_action( 'admin_menu', [$this,'admin_menu'] );
         add_filter( 'plugin_action_links_aitch-ref/_plugin.php', [$this, 'admin_plugins'] );
+
+        $this->aitch = $aitch;
     }
 
     /**
@@ -113,7 +118,7 @@ class Admin
     public function render_urls()
     {
         $vars = [
-            'urls' => get_urls_option()
+            'urls' => implode( "\n", $this->aitch->get_setting('urls') )
         ];
         
         echo render( 'admin/options-general-urls', $vars );
@@ -126,7 +131,7 @@ class Admin
     public function render_filters_absolute()
     {
         $vars = [
-            'filters_absolute' => implode( ', ', get_filters_options('absolute') )
+            'filters_absolute' => implode( ', ', $this->aitch->get_setting('filters_absolute') )
         ];
 
         echo render( 'admin/options-general-absolute', $vars );
@@ -139,7 +144,7 @@ class Admin
     public function render_filters_relative()
     {
         $vars = [
-            'filters_relative' => implode( ', ', get_filters_options('relative') )
+            'filters_relative' => implode( ', ', $this->aitch->get_setting('filters_relative') )
         ];
 
         echo render( 'admin/options-general-relative', $vars );
