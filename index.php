@@ -2,8 +2,8 @@
 
 namespace aitchref;
 
-if (!function_exists('aitchref\version')) {
-    require __DIR__.'/autoload.php';
+if (file_exists(__DIR__.'/vendor/autoload.php')) {
+    require __DIR__.'/vendor/autoload.php';
 }
 
 call_user_func( function () {
