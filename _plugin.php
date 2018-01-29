@@ -8,6 +8,12 @@ Author:			postpostmodern, pinecone-dot-website
 Author URI:		http://rack.and.pinecone.website/
 */
 
-register_activation_hook( __FILE__, create_function("", '$ver = "5.4"; if( version_compare(phpversion(), $ver, "<") ) die( "This plugin requires PHP version $ver or greater be installed." );') );
-
-require __DIR__.'/index.php';
+if (version_compare(phpversion(), '5.4', "<")) {
+    add_action('admin_notices', create_function("", 'function(){
+        echo "<div class=\"notice notice-success is-dismissible\">
+                <p>aitch-ref! requires PHP 5.4 or greater</p>
+              </div>";
+    };'));
+} else {
+    require __DIR__.'/index.php';
+}

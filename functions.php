@@ -9,7 +9,7 @@ namespace aitchref;
 *   @param object|array
 *   @return
 */
-function render($filename, $vars = array())
+function render($filename, $vars = [])
 {
     $template = __DIR__.'/views/'.$filename.'.php';
     if (file_exists($template)) {

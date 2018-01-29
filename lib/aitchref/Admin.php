@@ -22,9 +22,9 @@ class Admin
     */
     public function admin_footer_text($original = '')
     {
-        return render( 'admin/options-general_footer', array(
+        return render( 'admin/options-general_footer', [
             'version' => version()
-        ) );
+        ] );
     }
 
     /**
@@ -44,14 +44,14 @@ class Admin
         add_settings_section(
             'aitch_ref_settings_section',
             '',    // subhead
-            array($this,'description'),
+            [$this,'description'],
             'aitch_ref_settings'
         );
 
         add_settings_field(
             'aitch_ref_settings-urls',
             'Site URLs',
-            array($this, 'render_urls'),
+            [$this, 'render_urls'],
             'aitch_ref_settings',
             'aitch_ref_settings_section'
         );
@@ -59,7 +59,7 @@ class Admin
         add_settings_field(
             'aitch_ref_settings-absolute',
             'Absolute',
-            array($this, 'render_filters_absolute'),
+            [$this, 'render_filters_absolute'],
             'aitch_ref_settings',
             'aitch_ref_settings_section'
         );
@@ -67,12 +67,12 @@ class Admin
         add_settings_field(
             'aitch_ref_settings-relative',
             'Relative',
-            array($this, 'render_filters_relative'),
+            [$this, 'render_filters_relative'],
             'aitch_ref_settings',
             'aitch_ref_settings_section'
         );
 
-        register_setting( 'aitch_ref_settings', 'aitch_ref_settings', array($this,'save_setting') );
+        register_setting( 'aitch_ref_settings', 'aitch_ref_settings', [$this,'save_setting'] );
     }
 
     /**

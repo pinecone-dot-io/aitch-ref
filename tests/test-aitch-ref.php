@@ -9,10 +9,10 @@ class SampleTest extends WP_UnitTestCase {
 	public function setUp(){
 		parent::setUp();
 		
-		$post_id = $this->factory->post->create( array(
+		$post_id = $this->factory->post->create( [
 			'post_title' => 'Title',
 			'post_content' => 'Post Content' 
-		) );
+		 ] );
 		$this->post = get_post( $post_id );
 	}
 	

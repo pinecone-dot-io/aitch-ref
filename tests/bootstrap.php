@@ -7,7 +7,7 @@ if ( !$_tests_dir )
 require_once $_tests_dir . '/includes/functions.php';
 
 function _manually_load_plugin() {
-	update_option( 'aitchref_urls', json_encode(array('http://example.org')) );
+	update_option( 'aitchref_urls', json_encode(['http://example.org']) );
 	$_SERVER['HTTP_HOST'] = 'aitch-ref.com';
 	
 	require dirname( __FILE__ ) . '/../_plugin.php';
